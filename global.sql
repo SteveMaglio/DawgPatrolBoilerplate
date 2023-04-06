@@ -12,6 +12,10 @@ create table if not exists LockerRoom
     num_toilets     INT not null,
     sauna_capacity  INT not null,
     towels          INT not null
+    -- TODO: potentially tally open locker count, or be able to locate individual open lockers within the locker room
+
+
+
 --    bathroom int, -- foreign key to bathroom entity tuple
 --  sauna int-- foreign key to sauna entity tuple
 );
@@ -132,10 +136,7 @@ create table if not exists Student
         FOREIGN KEY (section_being_used) REFERENCES Section (section_id) on UPDATE cascade on DELETE CASCADE,
     CONSTRAINT fk_10
         FOREIGN KEY (class_being_used) REFERENCES Class (class_id) on UPDATE cascade on DELETE CASCADE
-
-
 );
-
 
 create table if not exists PR
 (
@@ -148,7 +149,6 @@ create table if not exists PR
     CONSTRAINT fk_6
         FOREIGN KEY (student_id) REFERENCES Student (NUid) on UPDATE cascade on DELETE CASCADE
 );
-
 
 -- STUDENT/TEAM INFO
 
@@ -218,15 +218,14 @@ create table if not exists Music
 -- CLASS
 
 INSERT INTO LockerRoom
-VALUES ('Male', 4, 6, 87);
-INSERT INTO LockerRoom
-VALUES ('Female', 10, 1, 60);
+VALUES ('Male', 4, 6, 87),
+       ('Female', 10, 1, 60);
 INSERT INTO Locker
 VALUES (10, 0, 'Female'),
        (12, 1, 'Male');
 INSERT INTO ComboLock
 VALUES (47, '9878', 10),
-       (103, '7776', 67);
+       (103, '7776', 12);
 INSERT INTO Section
 VALUES (7, 'Weight Room', 2),
        (4, 'Yoga Room', 2);
@@ -238,37 +237,58 @@ VALUES (10, 'Bench', 135, 7, 34),
        (13, 'Squat Rack', 600, 7, 54);
 INSERT INTO BodyZoneMachineInfo
 VALUES (7, 13),
-       (20, 5);
+       (4, 10);
+
+
+INSERT INTO Employee
+VALUES (10, 'Alison', 'Cecilia', 'Picerno', 0, '2003-07-11', 'Manager', 40, null, 7, 1),
+       (21, 'Margot', 'Arden', 'Johnson', 0, '1999-12-12', 'Trainer', 17, 10, 4, 0);
+
+
+
+INSERT INTO Class
+Values (7, 'Yoga', 10, '14-02-23 09.00.00', 60, 10),
+       (10, 'Spin', 21, '17-03-22 04.00.00', 75, 15);
+
+
+INSERT INTO Student
+VALUES (001029293, 'Stephen', 'Gallagher', 'Magliocchino', True, '2002-02-13', 185, 180, True, 47, 'Male', 7, 7),
+       (001283393, 'Connor', 'IDK', 'Garmey', True, '2003-11-07', 160, 165, True, 103, 'Male', 4, 10);
+
+INSERT INTO GymCrushInfo
+VALUES (001029293, 001283393);
+
+
+INSERT INTO PR
+VALUES
+       (10, 001029293, 'bench press', 275, 10);
 
 
 INSERT INTO Sport
 VALUES (1, 'Soccer', 11),
-       (2, 'Basketball, 5'),
+       (2, 'Basketball', 5),
        (3, 'Volleyball', 6),
        (4, 'Badminton', 2),
        (5, 'Handball', 8);
 
 INSERT INTO Music
-VALUES (1, 'Levitating', 1, 'Dua Lipa', 'Pop'),
-       (2, 'Ric Flair Drip', 1, '21 Savage', 'Rap'),
-       (3, 'Thunderstruck', 1, 'AC/DC', 'Rock'),
-       (4, 'Life Is Good', 2, 'Drake', 'Rap'),
-       (5, 'Flashing Lights', 2, 'Kanye West', 'Rap'),
-       (6, 'Work', 3, 'Rihanna', 'Pop');
+VALUES (1, 'Levitating', 10, 'Dua Lipa', 'Pop'),
+       (2, 'Ric Flair Drip', 10, '21 Savage', 'Rap'),
+       (3, 'Thunderstruck', 10, 'AC/DC', 'Rock'),
+       (4, 'Life Is Good', 21, 'Drake', 'Rap'),
+       (5, 'Flashing Lights', 21, 'Kanye West', 'Rap'),
+       (6, 'Work', 10, 'Rihanna', 'Pop');
 
 INSERT INTO Team
 VALUES (1, 'Arsenal', 11, 1),
-       (2, 'Chelsea, 5', 1),
+       (2, 'Chelsea', 5, 1),
        (3, 'Bad Boys for Life', 6, 4),
        (4, 'BumpSetSpikeTheseFools', 2, 3),
        (5, 'Nerds HC', 8, 5);
 
 INSERT INTO TeamInfo
-VALUES (1, 1),
-       (2,1),
-       (3,1),
-       (3,3),
-       (4,2),
-       (5,3),
-       (6,2),
-       (2,4);
+VALUES (001029293, 1),
+       (001029293, 3),
+       (001283393, 3),
+       (001283393, 2),
+       (001283393, 4);
