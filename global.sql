@@ -217,6 +217,29 @@ create table if not exists Music
 -- QUEUE
 -- CLASS
 
+INSERT INTO LockerRoom
+VALUES ('Male', 4, 6, 87);
+INSERT INTO LockerRoom
+VALUES ('Female', 10, 1, 60);
+INSERT INTO Locker
+VALUES (10, 0, 'Female'),
+       (12, 1, 'Male');
+INSERT INTO ComboLock
+VALUES (47, '9878', 10),
+       (103, '7776', 67);
+INSERT INTO Section
+VALUES (7, 'Weight Room', 2),
+       (4, 'Yoga Room', 2);
+INSERT INTO BodyZone
+VALUES (7, 'Glutes'),
+       (4, 'Biceps');
+INSERT INTO Machine
+VALUES (10, 'Bench', 135, 7, 34),
+       (13, 'Squat Rack', 600, 7, 54);
+INSERT INTO BodyZoneMachineInfo
+VALUES (7, 13),
+       (20, 5);
+
 
 INSERT INTO Sport
 VALUES (1, 'Soccer', 11),
