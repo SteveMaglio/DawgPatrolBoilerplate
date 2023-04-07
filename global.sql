@@ -12,19 +12,13 @@ create table if not exists LockerRoom
     num_toilets     INT not null,
     sauna_capacity  INT not null,
     towels          INT not null
-    -- TODO: potentially tally open locker count, or be able to locate individual open lockers within the locker room
-
-
-
---    bathroom int, -- foreign key to bathroom entity tuple
---  sauna int-- foreign key to sauna entity tuple
 );
 
 create table if not exists Locker
 (
     locker_num       INT primary key,
     is_big_locker    boolean,
-    locker_room_name VARCHAR(6), -- references LockerRoom (locker_room_sex)
+    locker_room_name VARCHAR(6),
     CONSTRAINT fk_2
         FOREIGN KEY (locker_room_name) REFERENCES LockerRoom (locker_room_sex) on UPDATE cascade on DELETE CASCADE
 );
@@ -33,13 +27,10 @@ create table if not exists ComboLock
 (
     lock_id     INT primary key,
     combination VARCHAR(10) not null,
-    locker_num  INT, -- foreign key references Locker (locker_num)
+    locker_num  INT,
     CONSTRAINT fk_1
         FOREIGN KEY (locker_num) REFERENCES Locker (locker_num) on UPDATE cascade on DELETE CASCADE
 );
-
-
--- SECTION INFO
 
 create table if not exists Section
 (
@@ -59,8 +50,8 @@ create table if not exists Machine
     machine_id           INT primary key,
     machine_name         VARCHAR(30) not null,
     max_weight           INT         not null,
-    section              INT, -- references Section (section_id), -- foreign key for the Section entity
-    wait_time_in_minutes INT, -- could potentially be a TIME instead of int primitive
+    section              INT,
+    wait_time_in_minutes INT,
 
     CONSTRAINT fk_5
         FOREIGN KEY (section) REFERENCES Section (section_id) on UPDATE cascade on DELETE CASCADE
@@ -68,8 +59,8 @@ create table if not exists Machine
 
 create table if not exists BodyZoneMachineInfo
 (
-    body_zone_id int, -- references BodyZone (body_zone_id),
-    machine_id   int, -- references Machine (machine_id),
+    body_zone_id int,
+    machine_id   int,
     PRIMARY KEY (body_zone_id, machine_id),
     CONSTRAINT fk_3
         FOREIGN KEY (body_zone_id) REFERENCES BodyZone (body_zone_id) on UPDATE cascade on DELETE CASCADE,
@@ -85,10 +76,10 @@ create table if not exists Employee
     last_name              VARCHAR(40) not null,
     is_male                bool,
     DoB                    date,
-    job_title              VARCHAR(40), -- potential foreign key to a Jobs entity
+    job_title              VARCHAR(40), -- potential foreign key to new a Jobs entity
     hourly_wage_in_dollars INT,
-    reports_to             INT,         -- references Employee (employee_id), -- foreign key to Employee entity
-    section_assigned_to    INT,         -- references Section (section_id),
+    reports_to             INT,
+    section_assigned_to    INT,
     currently_on_shift     bool,
 
     CONSTRAINT fk_16
@@ -101,7 +92,7 @@ create table if not exists Class
 (
     class_id            INT primary key,
     class_name          VARCHAR(40),
-    instructor_id       INT, -- references Employee (employee_id), -- foreign key to Employee entity,
+    instructor_id       INT,
     start_datetime      datetime,
     duration_in_minutes INT not null,
     class_capacity      INT not null,
@@ -122,11 +113,10 @@ create table if not exists Student
     height_in_cm       INT         not null,
     weight_in_lbs      INT         not null,
     currently_in_gym   bool,
-    lock_used          INT,        -- references ComboLock (lock_id),
-    locker_room_used   VARCHAR(6), -- references Locker(locker_room_sex),
-    section_being_used INT,        -- references Section(section_id),
-    class_being_used   INT,        -- references Class (class_id),
-    -- locker_used      INT references Locker(locker_num),
+    lock_used          INT,
+    locker_room_used   VARCHAR(6),
+    section_being_used INT,
+    class_being_used   INT,
 
     CONSTRAINT fk_7
         FOREIGN KEY (lock_used) REFERENCES ComboLock (lock_id) on UPDATE cascade on DELETE CASCADE,
@@ -141,7 +131,7 @@ create table if not exists Student
 create table if not exists PR
 (
     pr_id           int primary key,
-    student_id      INT not null, -- references Student(NUid), -- foreign key to students
+    student_id      INT not null,
     pr_name_or_type VARCHAR(30),
     pr_weight       INT,
     pr_reps         INT,
@@ -155,8 +145,8 @@ create table if not exists PR
 
 create table if not exists GymCrushInfo
 (
-    crusher_id INT not null, -- references Student (NUid),
-    crush_id   INT not null, -- references Student (NUid),
+    crusher_id INT not null,
+    crush_id   INT not null,
     PRIMARY KEY (crusher_id, crush_id),
 
     CONSTRAINT fk_11
@@ -178,15 +168,15 @@ create table if not exists Team
     team_id   INT primary key,
     team_name VARCHAR(50) not null,
     num_wins  INT         not null,
-    sport     INT, -- references Sport (sport_id),
+    sport     INT,
     CONSTRAINT fk_13
         FOREIGN KEY (sport) REFERENCES Sport (sport_id) on UPDATE cascade on DELETE CASCADE
 );
 
 create table if not exists TeamInfo
 (
-    student_id INT not null, -- references Student (nuid), -- foreign key to students table
-    team_id    INT not null, -- references Team (team_id), -- foreign key to Teams table
+    student_id INT not null,
+    team_id    INT not null,
     PRIMARY KEY (team_id, student_id),
     CONSTRAINT fk_14
         FOREIGN KEY (student_id) REFERENCES Student (nuid) on UPDATE cascade on DELETE CASCADE,
@@ -201,21 +191,13 @@ create table if not exists Music
 (
     song_id            INT primary key,
     song_name          VARCHAR(40),
-    employee_player_id INT, -- references Employee (employee_id), -- foreign key to Employee entity,
+    employee_player_id INT,
     artist             TEXT,
     genre              TEXT,
-    -- location            INT references Section (section_id)    -- foreign key to Section entity
     CONSTRAINT fk_19
         FOREIGN KEY (employee_player_id) REFERENCES Employee (employee_id) on UPDATE cascade on DELETE CASCADE
 
 );
-
-
--- TO DO:
--- SCHEDULE
--- MUSIC
--- QUEUE
--- CLASS
 
 INSERT INTO LockerRoom
 VALUES ('Male', 4, 6, 87),
@@ -260,8 +242,7 @@ VALUES (001029293, 001283393);
 
 
 INSERT INTO PR
-VALUES
-       (10, 001029293, 'bench press', 275, 10);
+VALUES (10, 001029293, 'bench press', 275, 10);
 
 
 INSERT INTO Sport
