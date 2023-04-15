@@ -2,9 +2,37 @@
 
 from flask import Flask
 from flaskext.mysql import MySQL
+from flask import Blueprint, request, jsonify, make_response
+import json
 
 # create a MySQL object that we will use in other parts of the API
 db = MySQL()
+
+
+
+def perform_sql_query(query:str):
+        # get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    # use cursor to query the database for a list of products
+    cursor.execute(query)
+
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
 
 def create_app():
     app = Flask(__name__)
@@ -34,11 +62,13 @@ def create_app():
     from src.customers.customers import customers
     from src.products.products  import products
     from src.sections.sections  import sections
+    from src.machines.machines  import machines
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views,       url_prefix='/v')
     app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(products,    url_prefix='/p')
     app.register_blueprint(sections,    url_prefix='/s')
+    app.register_blueprint(machines,    url_prefix='/s')
 
     return app
