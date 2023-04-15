@@ -1,12 +1,13 @@
--- LOCKER ROOM INFO
-drop database DawgPatrol;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-create database DawgPatrol;
+DROP SCHEMA IF EXISTS `DawgPatrol` ;
+CREATE SCHEMA IF NOT EXISTS `DawgPatrol` DEFAULT CHARACTER SET latin1 ;
+USE `DawgPatrol` ;
 
-use DawgPatrol;
 
-
-create table if not exists LockerRoom
+create table if not exists `DawgPatrol`.`LockerRoom`
 (
     locker_room_sex VARCHAR(6) primary key,
     num_toilets     INT not null,
@@ -14,7 +15,7 @@ create table if not exists LockerRoom
     towels          INT not null
 );
 
-create table if not exists Locker
+create table if not exists `DawgPatrol`.`Locker`
 (
     locker_num       INT primary key,
     is_big_locker    boolean,
@@ -23,7 +24,7 @@ create table if not exists Locker
         FOREIGN KEY (locker_room_name) REFERENCES LockerRoom (locker_room_sex) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists ComboLock
+create table if not exists `DawgPatrol`.`ComboLock`
 (
     lock_id     INT primary key,
     combination VARCHAR(10) not null,
@@ -32,20 +33,20 @@ create table if not exists ComboLock
         FOREIGN KEY (locker_num) REFERENCES Locker (locker_num) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists Section
+create table if not exists `DawgPatrol`.`Section`
 (
     section_id   INT primary key,
     section_name VARCHAR(25) not null,
     floor_num    INT         not null
 );
 
-create table if not exists BodyZone
+create table if not exists `DawgPatrol`.`BodyZone`
 (
     body_zone_id   int primary key,
     body_zone_name VARCHAR(20) not null
 );
 
-create table if not exists Machine
+create table if not exists `DawgPatrol`.`Machine`
 (
     machine_id           INT primary key,
     machine_name         VARCHAR(30) not null,
@@ -57,7 +58,7 @@ create table if not exists Machine
         FOREIGN KEY (section) REFERENCES Section (section_id) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists BodyZoneMachineInfo
+create table if not exists `DawgPatrol`.`BodyZoneMachineInfo`
 (
     body_zone_id int,
     machine_id   int,
@@ -68,7 +69,7 @@ create table if not exists BodyZoneMachineInfo
         FOREIGN KEY (machine_id) REFERENCES Machine (machine_id) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists Employee
+create table if not exists `DawgPatrol`.`Employee`
 (
     employee_id            INT primary key,
     first_name             VARCHAR(40) not null,
@@ -88,7 +89,7 @@ create table if not exists Employee
         FOREIGN KEY (section_assigned_to) REFERENCES Section (section_id) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists Class
+create table if not exists `DawgPatrol`.`Class`
 (
     class_id            INT primary key,
     class_name          VARCHAR(40),
@@ -102,7 +103,7 @@ create table if not exists Class
 );
 
 
-create table if not exists Student
+create table if not exists `DawgPatrol`.`Student`
 (
     NUid               INT primary key,
     stu_first          VARCHAR(40) not null,
@@ -128,7 +129,7 @@ create table if not exists Student
         FOREIGN KEY (class_being_used) REFERENCES Class (class_id) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists PR
+create table if not exists `DawgPatrol`.`PR`
 (
     pr_id           int primary key,
     student_id      INT not null,
@@ -143,7 +144,7 @@ create table if not exists PR
 -- STUDENT/TEAM INFO
 
 
-create table if not exists GymCrushInfo
+create table if not exists `DawgPatrol`.`GymCrushInfo`
 (
     crusher_id INT not null,
     crush_id   INT not null,
@@ -155,7 +156,7 @@ create table if not exists GymCrushInfo
         FOREIGN KEY (crush_id) REFERENCES Student (NUid) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists Sport
+create table if not exists `DawgPatrol`.`Sport`
 (
     sport_id    INT primary key,
     sport_name  VARCHAR(40) not null,
@@ -163,7 +164,7 @@ create table if not exists Sport
 );
 
 
-create table if not exists Team
+create table if not exists `DawgPatrol`.`Team`
 (
     team_id   INT primary key,
     team_name VARCHAR(50) not null,
@@ -173,7 +174,7 @@ create table if not exists Team
         FOREIGN KEY (sport) REFERENCES Sport (sport_id) on UPDATE cascade on DELETE CASCADE
 );
 
-create table if not exists TeamInfo
+create table if not exists `DawgPatrol`.`TeamInfo`
 (
     student_id INT not null,
     team_id    INT not null,
@@ -187,7 +188,7 @@ create table if not exists TeamInfo
 
 -- EMPLOYEE INFO
 
-create table if not exists Music
+create table if not exists `DawgPatrol`.`Music`
 (
     song_id            INT primary key,
     song_name          VARCHAR(40),
@@ -212,7 +213,7 @@ VALUES (47, '9878', 10),
        (103, '7776', 12);
 
 INSERT INTO Section
-VALUES (7, 'Weight Room', 2),
+VALUES (7, 'Weight Room', 3),
        (4, 'Yoga Room', 2);
 
 INSERT INTO BodyZone
