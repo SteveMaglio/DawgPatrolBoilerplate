@@ -61,6 +61,9 @@ def create_app():
     from src.views import views
     from src.sections.sections  import sections
     from src.machines.machines  import machines
+    from src.student.student  import student
+    from src.employee.employee  import employee
+    from src.trainingclass.trainingclass  import TrainingClass
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views,       url_prefix='/v')
@@ -68,6 +71,7 @@ def create_app():
     app.register_blueprint(machines,    url_prefix='/m')
     app.register_blueprint(student,     url_prefix = '/stu')
     app.register_blueprint(employee,    url_prefix = '/emp')
+    app.register_blueprint(TrainingClass,    url_prefix = '/c')
 
 
     return app
