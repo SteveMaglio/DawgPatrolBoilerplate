@@ -55,3 +55,29 @@ def update_student_health(NUID):
 
     return "Success!   "
 
+
+
+
+@student.route('/gymcrush/post', methods = ['POST'])
+def add_new_crush():
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    id = the_data['CrushInput']
+    current_app.logger.info(f'crush_id: {id}')
+    id2 = the_data['NUid']
+    current_app.logger.info(f'crusher_id: {id2}')
+    
+    query = f'Insert into GymCrushInfo (crusher_id, crush_id) values ({id}, {id2})'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success! Woohoo   "
+
