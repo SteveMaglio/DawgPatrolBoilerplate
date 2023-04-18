@@ -37,7 +37,7 @@ def update_student_health(NUID):
     current_app.logger.info(the_data)
 
     # extract the variables
-    weight = the_data['prod_description']
+    weight = the_data['stud_weight']
     
     # construct query
     # query = ' UPDATE Student SET weight_in_lbs = " ' 
@@ -55,3 +55,30 @@ def update_student_health(NUID):
 
     return "Success!   "
 
+@student.route('/students', methods = ['POST'])
+def add_new_student():
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    first = the_data['stud_first']
+    current_app.logger.info(f'first: {first}')
+    last = the_data['stud_last']
+    current_app.logger.info(f'last: {last}')
+    dob = the_data['stud_dob']
+    current_app.logger.info(f'dob: {dob}')
+    NUID = the_data['NUID']
+    current_app.logger.info(f'NUID: {NUID}')
+    
+    # create query
+    query = f'Insert into Student (stu_first, stu_last, DoB, NUid) values ({first}, "{last}", {dob}, {NUID})'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
