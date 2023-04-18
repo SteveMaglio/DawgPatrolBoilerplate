@@ -53,6 +53,14 @@ def add_new_machine():
 
     return "Success!   "
 
+
+@machines.route('/wait_time/<machine_id>', methods = ['GET'])
+def get_machine_time(machine_id):
+    # create query
+    query = f'select machine_id, machine_name, wait_time_in_minutes from Machine where Machine.machine_id = {machine_id}'
+    return perform_sql_query(query)
+
+
 @machines.route('/wait_time/<machine_id>', methods = ['PUT'])
 def update_machine_time(machine_id):
 
@@ -64,7 +72,7 @@ def update_machine_time(machine_id):
     time = the_data['wait_time']
     
     # create query
-    query = f'UPDATE Student SET wait_time_in_minutes = "{time}, WHERE machine_id = "{machine_id}"'
+    query = f'UPDATE Student SET wait_time_in_minutes = {time}, WHERE machine_id = {machine_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
