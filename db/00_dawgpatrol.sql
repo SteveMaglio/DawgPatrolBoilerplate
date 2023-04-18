@@ -206,7 +206,12 @@ VALUES ('Male', 4, 6, 87),
 
 INSERT INTO Locker
 VALUES (10, 0, 'Female'),
-       (12, 1, 'Male');
+       (12, 1, 'Male'),
+       (13, 1, 'Male'),
+       (14, 0, 'Male'),
+       (15, 0, 'Male'),
+       (16, 1, 'Male'),
+       (17, 0, 'Male');
 
 INSERT INTO ComboLock
 VALUES (47, '9878', 10),
@@ -242,7 +247,8 @@ Values (7, 'Yoga', 10, '14-02-23 09.00.00', 60, 10),
 
 INSERT INTO Student
 VALUES (001029293, 'Stephen', 'Gallagher', 'Magliocchino', True, '2002-02-13', 185, 180, True, 47, 'Male', 7, 7),
-       (001283393, 'Connor', 'IDK', 'Garmey', True, '2003-11-07', 160, 165, True, 103, 'Male', 4, 10);
+       (001283393, 'Connor', 'IDK', 'Garmey', True, '2003-11-07', 160, 165, True, 103, 'Male', 4, 10),
+       (001093393, 'Robert', 'Maxwell', 'Leroux', True, '2002-04-20', 160, 165, True, null, 'Male', 4, 10);
 
 INSERT INTO GymCrushInfo
 VALUES (001029293, 001283393);
@@ -280,3 +286,5 @@ VALUES (001029293, 1),
        (001283393, 3),
        (001283393, 2),
        (001283393, 4);
+
+select * from Locker;
