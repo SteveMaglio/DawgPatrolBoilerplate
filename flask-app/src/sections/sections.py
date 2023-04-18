@@ -31,17 +31,19 @@ def get_class_capacity(class_id):
     query = 'select class_capacity from Class where class_id = {0}'.format(class_id)
     return perform_sql_query(query)
 
-@sections.route('/emp/<employee_id>', methods = ['PUT'])
-def move_employee(employee_id):
+# move employee to new section
+@sections.route('/employee', methods = ['PUT'])
+def move_employee():
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
 
     # extract the variables
     section = the_data['section']
+    employee_id = the_data['employee_id']
     
     # create query
-    query = f'UPDATE Employee SET section_assigned_to = "{section}, WHERE employee_id = {0}'.format(employee_id)
+    query = f'UPDATE Employee SET section_assigned_to = {section} WHERE employee_id = {employee_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
