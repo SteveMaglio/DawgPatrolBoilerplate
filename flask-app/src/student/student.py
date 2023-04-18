@@ -28,6 +28,12 @@ def get_student_health_info(NUID):
     query = 'select height_in_cm, weight_in_lbs from Student where Student.NUID = {0}'.format(NUID)
     return perform_sql_query(query)
 
+#finds a specific student by NUID
+@student.route('/students/locks_used', methods=['GET'])
+def get_student_by_nuid(NUID):
+    query = 'select count(*) from Student where lock_used is not null'
+    return perform_sql_query(query)
+
 
 @student.route('/students/<NUID>/health', methods = ['PUT'])
 def update_student_health(NUID):
