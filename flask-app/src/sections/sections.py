@@ -75,7 +75,7 @@ def delete_section():
 
 # delete a class if closed/not available
 @sections.route('/class', methods = ['DELETE'])
-def delete_section():
+def delete_class():
 
     # collect data
     the_data = request.json
