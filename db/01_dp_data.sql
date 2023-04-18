@@ -1,4 +1,6 @@
 
+USE `DawgPatrol` ;
+
 INSERT INTO BodyZoneMachineInfo(body_zone_id,machine_id) VALUES (7,165);
 INSERT INTO BodyZoneMachineInfo(body_zone_id,machine_id) VALUES (4,210);
 INSERT INTO BodyZoneMachineInfo(body_zone_id,machine_id) VALUES (3,258);
