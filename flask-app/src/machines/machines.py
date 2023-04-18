@@ -75,7 +75,7 @@ def update_machine_time(machine_id):
     return "Success!   "
 
 @machines.route('/machine', methods = ['DELETE'])
-def update_machine_time():
+def remove_machine():
 
     # collect data
     the_data = request.json

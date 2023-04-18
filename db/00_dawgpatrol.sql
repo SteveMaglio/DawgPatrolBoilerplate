@@ -206,7 +206,12 @@ VALUES ('Male', 4, 6, 87),
 
 INSERT INTO Locker
 VALUES (10, 0, 'Female'),
-       (12, 1, 'Male');
+       (12, 1, 'Male'),
+       (13, 1, 'Male'),
+       (14, 0, 'Male'),
+       (15, 0, 'Male'),
+       (16, 1, 'Male'),
+       (17, 0, 'Male');
 
 INSERT INTO ComboLock
 VALUES (47, '9878', 10),
@@ -282,7 +287,4 @@ VALUES (001029293, 1),
        (001283393, 2),
        (001283393, 4);
 
-
-select count(*) from ComboLock;
-select count(*) from Student where lock_used is not null;
-select count(*) from Student;
+select * from Locker;

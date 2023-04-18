@@ -29,9 +29,17 @@ def get_student_health_info(NUID):
     return perform_sql_query(query)
 
 #finds a specific student by NUID
-@student.route('/students/locks_used', methods=['GET'])
-def get_student_by_nuid(NUID):
-    query = 'select count(*) from Student where lock_used is not null'
+@student.route('/students/locks_used/<sex>', methods=['GET'])
+def get_num_locks_used(sex):
+    #male, Male, m, M, MALE, etc
+    if sex[0].lower() == 'm':
+        query = 'select count(*) from Student where lock_used is not null and is_male'
+    elif sex[0].lower() == 'f':
+        #all other sexes (ie female)
+        query = 'select count(*) from Student where lock_used is not null and not is_male'  
+    else:
+        raise ValueError(f'improper sex {sex} given to the route')  
+    
     return perform_sql_query(query)
 
 
