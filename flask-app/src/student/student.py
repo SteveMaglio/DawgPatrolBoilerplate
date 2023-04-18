@@ -29,7 +29,7 @@ def get_student_health_info(NUID):
     return perform_sql_query(query)
 
 
-@student.route('/product', methods = ['PUT'])
+@student.route('/health', methods = ['PUT'])
 def update_student_health(NUID):
 
     # collect data
