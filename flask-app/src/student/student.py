@@ -29,23 +29,18 @@ def get_student_health_info(NUID):
     return perform_sql_query(query)
 
 
-@student.route('/health', methods = ['PUT'])
+@student.route('/students/<NUID>/health', methods = ['PUT'])
 def update_student_health(NUID):
 
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
 
-    # extract the variables
-    weight = the_data['stud_weight']
     
-    # construct query
-    # query = ' UPDATE Student SET weight_in_lbs = " ' 
-    # query += weight '", '
-    # query += 'WHERE NUid = '", '
-    # query += NUID + ')'
-
-    query = f'UPDATE Student SET weight_in_lbs = "{weight}, WHERE NUId = "{NUID}"'
+    # extract the variables
+    height = the_data['stud_height']
+    weight = the_data['stud_weight']
+    query = f'UPDATE Student SET weight_in_lbs = {weight}, height_in_cm = {height} WHERE NUid = {NUID}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
