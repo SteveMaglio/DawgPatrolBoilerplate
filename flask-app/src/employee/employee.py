@@ -19,8 +19,8 @@ def get_employee_by_id(employee_id):
     return perform_sql_query(query)
 
 
-@employee.route('employee/off_shift', methods = ['DELETE'])
-def clock_out():
+@employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
+def clock_out(employee_id):
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
@@ -28,7 +28,7 @@ def clock_out():
     # extract the variables
     id = the_data['emp_id']
 
-    query = f'UPDATE Employee SET currently_on_shift = {0} WHERE employee_id = {id}'
+    query = f'UPDATE Employee SET currently_on_shift = {0} WHERE employee_id = {0}'.format(employee_id)
     current_app.logger.info(query)
 
     # execute and committing the insert statement
@@ -39,8 +39,8 @@ def clock_out():
     return "Success!   "
 
 
-@employee.route('employee/wage', methods = ['PUT'])
-def update_wage():
+@employee.route('/wage/<employee_id>', methods = ['PUT'])
+def update_wage(employee_id):
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
@@ -48,7 +48,36 @@ def update_wage():
     # extract the variables
     wage = the_data['wage']
 
-    query = f'UPDATE Employee SET hourly_wage_in_dollars = {wage} WHERE employee_id = {id}'
+    query = f'UPDATE Employee SET hourly_wage_in_dollars = {wage} WHERE employee_id = {0}'.format(employee_id)
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
+
+# allow employee to add song to queue
+@employee.route('/music', methods = ['POST'])
+def play_song():
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    song_name = the_data['song_name']
+    current_app.logger.info(f'song_name: {song_name}')
+    
+    emp = the_data['emp_id']
+    current_app.logger.info(f'floor_num: {floor_num}')
+    
+    section_id = the_data['section_id']
+    current_app.logger.info(f'section_id: {section_id}')
+    
+    # create query
+    query = f'Insert into Student (section_name, floor_num, section_id) values ({section_name}, {floor_num}, {section_id})'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
