@@ -73,3 +73,24 @@ def update_machine_time(machine_id):
     db.get_db().commit()
 
     return "Success!   "
+
+@machines.route('/machine', methods = ['DELETE'])
+def update_machine_time():
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    id = the_data['machine_id']
+    
+    # create query
+    query = f'DELETE FROM Machine WHERE machine_id = {id}'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "

@@ -85,7 +85,6 @@ def add_new_student():
 
 
 
-
 @student.route('/gymcrush/post', methods = ['POST'])
 def add_new_crush():
 
@@ -108,3 +107,23 @@ def add_new_crush():
     db.get_db().commit()
 
     return "Success! Woohoo   "
+
+
+@student.route('student/inactive', methods = ['DELETE'])
+def delete_student():
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    NUID = the_data['NUID']
+
+    query = f'UPDATE Student SET currently_in_gym = {0} WHERE NUId = {NUID}'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
