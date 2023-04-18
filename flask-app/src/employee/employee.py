@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db, perform_sql_query
 
@@ -16,6 +16,12 @@ def get_employees():
 @employee.route('/employees/<employee_id>', methods=['GET'])
 def get_employee_by_id(employee_id):
     query = 'select * from employee where Employee.employee_id = {0}'.format(employee_id)
+    return perform_sql_query(query)
+
+# finds a employee's boss
+@employee.route('/reporting/<employee_id>', methods=['GET'])
+def get_employee_by_id(employee_id):
+    query = 'select reports_to from employee where Employee.employee_id = {0}'.format(employee_id)
     return perform_sql_query(query)
 
 
@@ -69,15 +75,17 @@ def play_song():
     # extract the variables
     song_name = the_data['song_name']
     current_app.logger.info(f'song_name: {song_name}')
-    
-    emp = the_data['emp_id']
-    current_app.logger.info(f'floor_num: {floor_num}')
-    
-    section_id = the_data['section_id']
-    current_app.logger.info(f'section_id: {section_id}')
+    employee_player_id = the_data['employee_player_id']
+    current_app.logger.info(f'employee_player_id: {employee_player_id}')
+    artist = the_data['artist']
+    current_app.logger.info(f'artist: {artist}')
+    genre = the_data['genre']
+    current_app.logger.info(f'genre: {genre}')
+    song_id = the_data['song_id']
+    current_app.logger.info(f'song_id: {song_id}')
     
     # create query
-    query = f'Insert into Student (section_name, floor_num, section_id) values ({section_name}, {floor_num}, {section_id})'
+    query = f'Insert into Music (song_name, employee_player_id, artist, genre, song_id) values ({song_name}, {employee_player_id}, {artist}, {genre}, {song_id})'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
