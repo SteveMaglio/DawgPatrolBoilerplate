@@ -33,18 +33,17 @@ def add_new_machine():
 
     # extract the variables
     id = the_data['machine_id']
+    current_app.logger.info(f'id: {id}')
     name = the_data['machine_name']
+    current_app.logger.info(f'name: {name}')
     max_weight = the_data['max_weight']
+    current_app.logger.info(f'max_weight: {max_weight}')
     section = the_data['machine_section']
+    current_app.logger.info(f'section: {section}')
     wait_time = the_data['machine_wait_time']
-
-    # construct query
-    query = 'Insert into Machine (machine_id, machine_name, max_weight, section, wait_time_in_minutes) values ("'
-    query += id + '", '
-    query += name + '", '
-    query += max_weight + '", '
-    query += section + '", '
-    query += str(wait_time) + ')'
+    current_app.logger.info(f'wait_time: {wait_time}')
+    
+    query = f'Insert into Machine (machine_id, machine_name, max_weight, section, wait_time_in_minutes) values ({id}, "{name}", {max_weight}, "{str(section)}", {str(wait_time)})'
     current_app.logger.info(query)
 
     # execute and committing the insert statement

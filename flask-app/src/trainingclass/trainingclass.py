@@ -3,7 +3,7 @@ import json
 from src import db, perform_sql_query
 
 
-TrainingClass = Blueprint('employee', __name__)
+TrainingClass = Blueprint('class', __name__)
 
 # Get all the classes in our database
 @TrainingClass.route('/class', methods=['GET'])

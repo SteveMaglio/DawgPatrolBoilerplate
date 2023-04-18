@@ -40,11 +40,12 @@ def update_student_health(NUID):
     weight = the_data['prod_description']
     
     # construct query
-    query = ' UPDATE Student SET weight_in_lbs = " ' 
-    query += weight '", '
-    query += 'WHERE NUid = '", '
-    query += NUID + ')'
+    # query = ' UPDATE Student SET weight_in_lbs = " ' 
+    # query += weight '", '
+    # query += 'WHERE NUid = '", '
+    # query += NUID + ')'
 
+    query = f'UPDATE Student SET weight_in_lbs = "{weight}, WHERE NUId = "{NUID}"'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
