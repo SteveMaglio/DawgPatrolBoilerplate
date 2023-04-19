@@ -18,13 +18,6 @@ def get_employee_by_id(employee_id):
     query = 'select * from employee where Employee.employee_id = {0}'.format(employee_id)
     return perform_sql_query(query)
 
-# finds a employee's boss
-@employee.route('/reporting/<employee_id>', methods=['GET'])
-def get_employee_reporting_to(employee_id):
-    query = 'select reports_to from employee where Employee.employee_id = {0}'.format(employee_id)
-    return perform_sql_query(query)
-
-
 @employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
 def clock_out(employee_id):
     # collect data
@@ -45,29 +38,9 @@ def clock_out(employee_id):
     return "Success!   "
 
 
-@employee.route('/wage/<employee_id>', methods = ['PUT'])
-def update_wage(employee_id):
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    # extract the variables
-    wage = the_data['wage']
-
-    query = f'UPDATE Employee SET hourly_wage_in_dollars = {wage} WHERE employee_id = {0}'.format(employee_id)
-    current_app.logger.info(query)
-
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
-
 # allow employee to add song to queue
 @employee.route('/music', methods = ['POST'])
 def play_song():
-
 
     # collect data
     the_data = request.json
@@ -118,3 +91,24 @@ def move_employee():
     db.get_db().commit()
 
     return "Success!   "
+
+# Get all the sections from the database
+@employee.route('/sections', methods=['GET'])
+def get_sections():
+    
+    query = 'SELECT section_id, section_name, floor_num FROM Section'
+    return perform_sql_query(query)
+
+@employee.route('/wait_time/<machine_id>', methods = ['GET'])
+def get_machine_time(machine_id):
+    # create query
+    query = f'select machine_id, machine_name, wait_time_in_minutes from Machine where Machine.machine_id = {machine_id}'
+    return perform_sql_query(query)
+
+# Get all the machines from the database
+@employee.route('/machines', methods=['GET'])
+def get_products():
+    
+    query = 'SELECT machine_id, machine_name, floor_num FROM machine'
+    return perform_sql_query(query)
+
