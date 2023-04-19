@@ -133,7 +133,7 @@ def get_lockers_by_sex(sex):
     return perform_sql_query(query)
 
 # CLASS CAPACITY PAGE
-@student.route('/class', methods = ['GET'])
+@student.route('/class/<class_id>', methods = ['GET'])
 def get_class_capacity(class_id):
     query = 'select class_capacity from Class where class_id = {0}'.format(class_id)
     return perform_sql_query(query)
