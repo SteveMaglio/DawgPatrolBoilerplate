@@ -18,12 +18,6 @@ def get_employee_by_id(employee_id):
     query = 'select * from employee where Employee.employee_id = {0}'.format(employee_id)
     return perform_sql_query(query)
 
-# finds a employee's boss
-@employee.route('/reporting/<employee_id>', methods=['GET'])
-def get_employee_by_id(employee_id):
-    query = 'select reports_to from employee where Employee.employee_id = {0}'.format(employee_id)
-    return perform_sql_query(query)
-
 
 @employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
 def clock_out(employee_id):
@@ -68,6 +62,7 @@ def update_wage(employee_id):
 @employee.route('/music', methods = ['POST'])
 def play_song():
 
+
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
@@ -85,7 +80,8 @@ def play_song():
     current_app.logger.info(f'song_id: {song_id}')
     
     # create query
-    query = f'Insert into Music (song_name, employee_player_id, artist, genre, song_id) values ({song_name}, {employee_player_id}, {artist}, {genre}, {song_id})'
+    #query = f'Insert into Music (song_name, employee_player_id, artist, genre, song_id) values ({song_name}, {employee_player_id}, {artist}, {genre}, {song_id})'
+    query = f"Insert into Music (song_id, song_name, employee_player_id, artist, genre) values ({int(song_id)}, '{song_name}', {int(employee_player_id)}, '{artist}', '{genre}')"
     current_app.logger.info(query)
 
     # execute and committing the insert statement
