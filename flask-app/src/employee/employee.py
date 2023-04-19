@@ -72,7 +72,7 @@ def play_song():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    # extract the variables
+    # extract the variable
     song_name = the_data['song_name']
     current_app.logger.info(f'song_name: {song_name}')
     employee_player_id = the_data['employee_player_id']
