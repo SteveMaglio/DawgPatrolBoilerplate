@@ -92,7 +92,7 @@ def get_locker_rooms():
 #finds a specific locker room by sex
 @student.route('/locker_room/<sex>', methods=['GET'])
 def get_locker_room_by_sex(sex):
-    query = 'select * from LockerRoom where LockerRoom.locker_room_sex = {0}'.format(sex)
+    query = "select * from LockerRoom where locker_room_sex = '{0}'".format(sex)
     return perform_sql_query(query)
 
 
