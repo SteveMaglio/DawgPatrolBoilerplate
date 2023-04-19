@@ -131,3 +131,17 @@ def fire_employee():
     db.get_db().commit()
 
     return "Success!   "
+
+# display top genres
+@employee.route('/top_3_genres', methods = ['GET'])
+def get_genre():
+    cursor = db.get_db().cursor()
+    query = '''
+        SELECT genre
+        FROM Music
+        Group by genre
+        ORDER BY count(genre) DESC
+        LIMIT 3
+    '''
+    return perform_sql_query(query)
+
