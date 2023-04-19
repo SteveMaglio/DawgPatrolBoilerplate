@@ -147,10 +147,10 @@ def update_machine_time(machine_id):
     current_app.logger.info(the_data)
 
     # extract the variables
-    time = the_data['wait_time']
+    time = the_data['wait_time_in_minutes']
     
     # create query
-    query = f'UPDATE Student SET wait_time_in_minutes = {time}, WHERE machine_id = {machine_id}'
+    query = f'UPDATE Machine SET wait_time_in_minutes = {time} WHERE machine_id = {machine_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
