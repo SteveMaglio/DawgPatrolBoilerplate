@@ -61,27 +61,6 @@ def get_machine_time(machine_id):
     return perform_sql_query(query)
 
 
-@machines.route('/wait_time/<machine_id>', methods = ['PUT'])
-def update_machine_time(machine_id):
-
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    # extract the variables
-    time = the_data['wait_time']
-    
-    # create query
-    query = f'UPDATE Student SET wait_time_in_minutes = {time}, WHERE machine_id = {machine_id}'
-    current_app.logger.info(query)
-
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
-
 @machines.route('/machine', methods = ['DELETE'])
 def remove_machine():
 

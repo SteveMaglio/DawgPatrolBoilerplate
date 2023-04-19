@@ -25,33 +25,9 @@ def get_sections_by_floor(floorNum):
     return perform_sql_query(query)
 
 # find class availability
-# CLASS CAPACITY PAGE
-@sections.route('/class', methods = ['GET'])
-def get_class_capacity(class_id):
-    query = 'select class_capacity from Class where class_id = {0}'.format(class_id)
-    return perform_sql_query(query)
 
-# move employee to new section
-@sections.route('/employee', methods = ['PUT'])
-def move_employee():
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
 
-    # extract the variables
-    section = the_data['section']
-    employee_id = the_data['employee_id']
-    
-    # create query
-    query = f'UPDATE Employee SET section_assigned_to = {section} WHERE employee_id = {employee_id}'
-    current_app.logger.info(query)
 
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
 
 # delete a section if closed/not available
 @sections.route('/section', methods = ['DELETE'])

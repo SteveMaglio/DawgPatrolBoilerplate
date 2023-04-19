@@ -90,3 +90,25 @@ def play_song():
     db.get_db().commit()
 
     return "Success!   "
+
+# move employee to new section
+@employee.route('/employee', methods = ['PUT'])
+def move_employee():
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    section = the_data['section']
+    employee_id = the_data['employee_id']
+    
+    # create query
+    query = f'UPDATE Employee SET section_assigned_to = {section} WHERE employee_id = {employee_id}'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "

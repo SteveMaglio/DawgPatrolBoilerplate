@@ -23,10 +23,6 @@ def get_student_lock(NUID):
     query = 'select lock_used from Student where Student.NUID = {0}'.format(NUID)
     return perform_sql_query(query)
 
-@student.route('/students/<NUID>/health', methods =['GET'])
-def get_student_health_info(NUID):
-    query = 'select height_in_cm, weight_in_lbs from Student where Student.NUID = {0}'.format(NUID)
-    return perform_sql_query(query)
 
 #finds a specific student by NUID
 @student.route('/students/locks_used/<sex>', methods=['GET'])
@@ -41,57 +37,6 @@ def get_num_locks_used(sex):
         raise ValueError(f'improper sex {sex} given to the route')  
     
     return perform_sql_query(query)
-
-
-@student.route('/students/<NUID>/health', methods = ['PUT'])
-def update_student_health(NUID):
-
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    
-    # extract the variables
-    height = the_data['stud_height']
-    weight = the_data['stud_weight']
-    query = f'UPDATE Student SET weight_in_lbs = {weight}, height_in_cm = {height} WHERE NUid = {NUID}'
-    current_app.logger.info(query)
-
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
-
-@student.route('/students', methods = ['POST'])
-def add_new_student():
-
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    # extract the variables
-    first = the_data['stud_first']
-    current_app.logger.info(f'first: {first}')
-    last = the_data['stud_last']
-    current_app.logger.info(f'last: {last}')
-    dob = the_data['stud_dob']
-    current_app.logger.info(f'dob: {dob}')
-    NUID = the_data['NUID']
-    current_app.logger.info(f'NUID: {NUID}')
-    
-    # create query
-    query = f'Insert into Student (stu_first, stu_last, DoB, NUid) values ({first}, "{last}", {dob}, {NUID})'
-    current_app.logger.info(query)
-
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
-
 
 
 @student.route('/gymcrush/post', methods = ['POST'])
@@ -128,6 +73,84 @@ def delete_student():
     NUID = the_data['NUID']
 
     query = f'UPDATE Student SET currently_in_gym = {0} WHERE NUId = {NUID}'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
+
+# Get all the locker rooms in our database
+@student.route('/locker_room', methods=['GET'])
+def get_locker_rooms():
+    
+    query = 'SELECT * FROM LockerRoom'
+    return perform_sql_query(query)
+
+#finds a specific locker room by sex
+@student.route('/locker_room/<sex>', methods=['GET'])
+def get_locker_room_by_sex(sex):
+    query = 'select * from LockerRoom where LockerRoom.locker_room_sex = {0}'.format(sex)
+    return perform_sql_query(query)
+
+
+#finds a the percentage full a locker room is by
+@student.route('/locker_room/percentage/<sex>', methods=['GET'])
+def get_locker_room_percentage_by_sex(sex):
+    female_predicate = ""
+    if sex[0].lower() == 'm':
+        sex = 'Male'
+    elif sex[0].lower() == 'f':
+        female_predicate = 'not'
+        sex = 'Female'
+    else:
+        raise ValueError(f'improper sex given: {sex}')
+    query = f'''
+    select 100*((select count(*) from Student join ComboLock CL on Student.lock_used = CL.lock_id where {female_predicate} Student.is_male)
+    /
+    (select count(*) from
+        Locker join LockerRoom LR on LR.locker_room_sex = Locker.locker_room_name where locker_room_sex = '{sex}')) as percentageFull'''
+    return perform_sql_query(query)
+
+
+# Get all the locker rooms in our database
+@student.route('/lockers', methods=['GET'])
+def get_lockers():
+    query = 'SELECT * FROM Locker'
+    return perform_sql_query(query)
+
+# Get all the locker rooms in our database by sex
+@student.route('/lockers/<sex>', methods=['GET'])
+def get_lockers_by_sex(sex):
+    if sex[0].lower() == 'm':
+        query = "select count(*) from Locker join LockerRoom LR on LR.locker_room_sex = Locker.locker_room_name where locker_room_sex = 'Male'"
+    elif sex[0].lower() == 'f':
+        query = "select count(*) from Locker join LockerRoom LR on LR.locker_room_sex = Locker.locker_room_name where locker_room_sex = 'Female'"
+    else: 
+        raise ValueError(f'improper sex given: {sex}')
+    return perform_sql_query(query)
+
+# CLASS CAPACITY PAGE
+@student.route('/class', methods = ['GET'])
+def get_class_capacity(class_id):
+    query = 'select class_capacity from Class where class_id = {0}'.format(class_id)
+    return perform_sql_query(query)
+
+
+@student.route('/wait_time/<machine_id>', methods = ['PUT'])
+def update_machine_time(machine_id):
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    time = the_data['wait_time']
+    
+    # create query
+    query = f'UPDATE Student SET wait_time_in_minutes = {time}, WHERE machine_id = {machine_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
