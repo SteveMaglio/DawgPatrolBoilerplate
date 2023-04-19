@@ -96,6 +96,19 @@ def get_locker_room_by_sex(sex):
     return perform_sql_query(query)
 
 
+#finds a specific locker room by sex
+@student.route('/locker_room/towel_count/<sex>', methods=['GET'])
+def get_locker_room_num_towels_by_sex(sex):
+    if sex[0].lower() == 'm':
+        sex = 'Male'
+    elif sex[0].lower() == 'f':
+        sex = 'Female'
+    else:
+        raise ValueError(f'improper sex given: {sex}')
+    query = "select towels from LockerRoom where locker_room_sex = '{0}'".format(sex)
+    return perform_sql_query(query)
+
+
 #finds a the percentage full a locker room is by
 @student.route('/locker_room/percentage/<sex>', methods=['GET'])
 def get_locker_room_percentage_by_sex(sex):

@@ -15,19 +15,21 @@ def get_employees():
 #finds a specific employee by their ID
 @employee.route('/employees/<employee_id>', methods=['GET'])
 def get_employee_by_id(employee_id):
-    query = 'select * from Employee where employee_id = {employee_id}'
+    query = f'select * from Employee where employee_id = {employee_id}'
     return perform_sql_query(query)
 
-@employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
-def clock_out(employee_id):
+@employee.route('/off_shift', methods = ['DELETE'])
+def clock_out():
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
+    
 
     # extract the variables
-    id = the_data['emp_id']
+    employee_id = the_data['emp_id']
+    current_app.logger.info(f'DELETING EMPLOYEE ID {employee_id}')
 
-    query = f'UPDATE Employee SET currently_on_shift = {0} WHERE employee_id = {0}'.format(employee_id)
+    query = f'UPDATE Employee SET currently_on_shift = 0 WHERE employee_id = {employee_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
@@ -92,11 +94,11 @@ def move_employee():
 
     return "Success!   "
 
-# Get all the sections from the database
+# Get all the section ids from the database
 @employee.route('/sections', methods=['GET'])
 def get_sections():
     
-    query = 'SELECT section_id, section_name, floor_num FROM Section'
+    query = 'SELECT section_id as label, section_id as value from Section'
     return perform_sql_query(query)
 
 @employee.route('/wait_time/<machine_id>', methods = ['GET'])
@@ -112,25 +114,6 @@ def get_products():
     query = 'SELECT machine_id, machine_name, section FROM Machine'
     return perform_sql_query(query)
 
-#fire employee
-@employee.route('/fire_employee', methods = ['DELETE'])
-def fire_employee():
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    # extract the variables
-    id = the_data['emp_id']
-
-    query = f'DELETE from Employee WHERE employee_id = {id}'
-    current_app.logger.info(query)
-
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
 
 # display top genres
 @employee.route('/top_3_genres', methods = ['GET'])
