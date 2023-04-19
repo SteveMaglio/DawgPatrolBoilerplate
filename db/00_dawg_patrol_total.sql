@@ -5666,4 +5666,3 @@ INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,
 INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,weight_in_lbs,currently_in_gym,lock_used,locker_room_used,section_being_used,class_being_used) VALUES (698,'Waldemar','Thoughtstorm','Cleave',false,'1995-03-04',136,748,true,325,'Male',7,36);
 INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,weight_in_lbs,currently_in_gym,lock_used,locker_room_used,section_being_used,class_being_used) VALUES (699,'Giacinta','Bubblemix','Frisel',true,'1998-07-12',133,344,true,598,'Male',3,NULL);
 INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,weight_in_lbs,currently_in_gym,lock_used,locker_room_used,section_being_used,class_being_used) VALUES (700,'Alford','Jaloo','Durgan',false,'1996-04-18',205,534,true,NULL,'Male',9,8);
-
