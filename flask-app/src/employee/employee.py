@@ -140,7 +140,7 @@ def get_classes():
     return perform_sql_query(query)
 
 
-# gets class information
+# gets class time info
 @employee.route('/get_class_info', methods = ['GET'])
 def get_class_info():
     the_data = request.json
@@ -157,7 +157,7 @@ def get_class_info():
     return perform_sql_query(query)
 
 
-# gets class information
+# gets class capacity
 @employee.route('/class_cap', methods = ['GET'])
 def class_cap():
     the_data = request.json
