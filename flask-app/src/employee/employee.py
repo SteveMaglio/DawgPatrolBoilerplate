@@ -137,7 +137,7 @@ def fire_employee():
 def get_genre():
     cursor = db.get_db().cursor()
     query = '''
-        SELECT genre, count(genre)
+        SELECT  count(genre), genre
         FROM Music
         Group by genre
         ORDER BY count(genre) DESC
