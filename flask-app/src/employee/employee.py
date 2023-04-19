@@ -68,11 +68,12 @@ def update_wage(employee_id):
 @employee.route('/music', methods = ['POST'])
 def play_song():
 
+
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
 
-    # extract the variables
+    # extract the variable
     song_name = the_data['song_name']
     current_app.logger.info(f'song_name: {song_name}')
     employee_player_id = the_data['employee_player_id']
@@ -85,7 +86,30 @@ def play_song():
     current_app.logger.info(f'song_id: {song_id}')
     
     # create query
-    query = f'Insert into Music (song_name, employee_player_id, artist, genre, song_id) values ({song_name}, {employee_player_id}, {artist}, {genre}, {song_id})'
+    #query = f'Insert into Music (song_name, employee_player_id, artist, genre, song_id) values ({song_name}, {employee_player_id}, {artist}, {genre}, {song_id})'
+    query = f"Insert into Music (song_id, song_name, employee_player_id, artist, genre) values ({int(song_id)}, '{song_name}', {int(employee_player_id)}, '{artist}', '{genre}')"
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
+
+# move employee to new section
+@employee.route('/employee', methods = ['PUT'])
+def move_employee():
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    section = the_data['section']
+    employee_id = the_data['employee_id']
+    
+    # create query
+    query = f'UPDATE Employee SET section_assigned_to = {section} WHERE employee_id = {employee_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
