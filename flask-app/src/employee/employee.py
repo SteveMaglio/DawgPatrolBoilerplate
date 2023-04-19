@@ -18,6 +18,12 @@ def get_employee_by_id(employee_id):
     query = 'select * from employee where Employee.employee_id = {0}'.format(employee_id)
     return perform_sql_query(query)
 
+# finds a employee's boss
+@employee.route('/reporting/<employee_id>', methods=['GET'])
+def get_employee_reporting_to(employee_id):
+    query = 'select reports_to from employee where Employee.employee_id = {0}'.format(employee_id)
+    return perform_sql_query(query)
+
 
 @employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
 def clock_out(employee_id):
