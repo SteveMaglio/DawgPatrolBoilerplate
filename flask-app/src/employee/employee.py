@@ -114,7 +114,7 @@ def get_products():
 
 #fire employee
 @employee.route('/fire_employee', methods = ['DELETE'])
-def clock_out(employee_id):
+def fire_employee():
     # collect data
     the_data = request.json
     current_app.logger.info(the_data)
