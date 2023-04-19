@@ -15,14 +15,12 @@ def get_employees():
 #finds a specific employee by their ID
 @employee.route('/employees/<employee_id>', methods=['GET'])
 def get_employee_by_id(employee_id):
-    query = 'select * from Employee where employee_id = {employee_id}'
+    query = f'select * from Employee where employee_id = {employee_id}'
     return perform_sql_query(query)
 
 @employee.route('/off_shift', methods = ['DELETE'])
 def clock_out():
     # collect data
-    
-    current_app.logger.info(f'')
     the_data = request.json
     current_app.logger.info(the_data)
     
