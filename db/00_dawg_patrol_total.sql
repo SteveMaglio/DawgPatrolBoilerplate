@@ -544,19 +544,19 @@ INSERT INTO BodyZone(body_zone_name,body_zone_id) VALUES ('back',9);
 
 
 
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Joe Versus the Volcano',109,'2023-03-24',69,23,1);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Steal This Movie!',97,'2024-2-15',48,54,2);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Turkish Delight (Turks fruit)',90,'2024-3-29',70,19,3);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Fist of Legend (Jing wu ying xiong)',87,'2022-8-21',110,45,4);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('The Care Bears Adventure in Wonderland',119,'2023-7-12',107,53,5);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Bye Bye Braverman',80,'2022-4-30',40,14,6);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Bounce: Behind the Velvet Rope',105,'2023-9-1',116,60,7);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Gun the Man Down',33,'2022-7-13',88,24,8);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Hate (Haine, La)',35,'2024-2-22',63,29,9);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Internet',116,'2022-12-16',98,57,10);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Indian in the Cupboard, The',138,'2022-10-15',63,58,11);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Tank Girl',68,'2023-4-10',44,28,12);
-INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Reagan',13,'2023-5-12',69,44,13);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Yoga',109,'2023-03-24',69,23,1);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Pilates',97,'2024-2-15',48,54,2);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Spin',90,'2024-3-29',70,19,3);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('CrossFit',87,'2022-8-21',110,45,4);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Golf',119,'2023-7-12',107,53,5);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Dancing',80,'2022-4-30',40,14,6);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Ballet',105,'2023-9-1',116,60,7);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Nutrition',33,'2022-7-13',88,24,8);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Aerobics',35,'2024-2-22',63,29,9);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Meditation',116,'2022-12-16',98,57,10);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Swim Class',138,'2022-10-15',63,58,11);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Wine Tasting Class',68,'2023-4-10',44,28,12);
+INSERT INTO Class(class_name,instructor_id,start_datetime,duration_in_minutes,class_capacity,class_id) VALUES ('Ronald Reagan',13,'2023-5-12',69,44,13);
 
 
 INSERT INTO ComboLock(combination,locker_num,lock_id) VALUES ('39-14-42',565,1);
