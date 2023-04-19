@@ -29,7 +29,7 @@ def clock_out():
     employee_id = the_data['emp_id']
     current_app.logger.info(f'DELETING EMPLOYEE ID {employee_id}')
 
-    query = f'UPDATE Employee SET currently_on_shift = false WHERE employee_id = {0}'.format(employee_id)
+    query = f'UPDATE Employee SET currently_on_shift = 0 WHERE employee_id = {employee_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
@@ -94,11 +94,11 @@ def move_employee():
 
     return "Success!   "
 
-# Get all the sections from the database
+# Get all the section ids from the database
 @employee.route('/sections', methods=['GET'])
 def get_sections():
     
-    query = 'SELECT section_id, section_name, floor_num FROM Section'
+    query = 'SELECT section_id as label, section_id as value from Section'
     return perform_sql_query(query)
 
 @employee.route('/wait_time/<machine_id>', methods = ['GET'])
