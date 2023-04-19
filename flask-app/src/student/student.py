@@ -159,3 +159,15 @@ def update_machine_time(machine_id):
     db.get_db().commit()
 
     return "Success!   "
+
+
+@student.route('/10_shortest_waits', methods = ['GET'])
+def get_shortest_time():
+    cursor = db.get_db().cursor()
+    query = '''
+        SELECT machine_id, machine_name, wait_time_in_minutes
+        FROM Machine
+        ORDER BY list_price ASC
+        LIMIT 10
+    '''
+    return perform_sql_query(query)
