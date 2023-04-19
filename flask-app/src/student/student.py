@@ -92,7 +92,7 @@ def get_locker_rooms():
 #finds a specific locker room by sex
 @student.route('/locker_room/<sex>', methods=['GET'])
 def get_locker_room_by_sex(sex):
-    query = 'select * from LockerRoom where LockerRoom.locker_room_sex = {0}'.format(sex)
+    query = "select * from LockerRoom where locker_room_sex = '{0}'".format(sex)
     return perform_sql_query(query)
 
 
@@ -133,7 +133,7 @@ def get_lockers_by_sex(sex):
     return perform_sql_query(query)
 
 # CLASS CAPACITY PAGE
-@student.route('/class', methods = ['GET'])
+@student.route('/class/<class_id>', methods = ['GET'])
 def get_class_capacity(class_id):
     query = 'select class_capacity from Class where class_id = {0}'.format(class_id)
     return perform_sql_query(query)
@@ -147,10 +147,10 @@ def update_machine_time(machine_id):
     current_app.logger.info(the_data)
 
     # extract the variables
-    time = the_data['wait_time']
+    time = the_data['wait_time_in_minutes']
     
     # create query
-    query = f'UPDATE Student SET wait_time_in_minutes = {time}, WHERE machine_id = {machine_id}'
+    query = f'UPDATE Machine SET wait_time_in_minutes = {time} WHERE machine_id = {machine_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement

@@ -12,7 +12,7 @@ db = MySQL()
 
 def perform_sql_query(query:str):
     
-    try:
+    #try:
             # get a cursor object from the database
         cursor = db.get_db().cursor()
 
@@ -35,8 +35,8 @@ def perform_sql_query(query:str):
             json_data.append(dict(zip(column_headers, row)))
 
         return jsonify(json_data)
-    except Exception as e:
-        return e.with_traceback
+    #except Exception as e:
+    #    return e.with_traceback
 
 def create_app():
     app = Flask(__name__)
