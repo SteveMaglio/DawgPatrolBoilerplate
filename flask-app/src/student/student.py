@@ -167,7 +167,7 @@ def get_shortest_time():
     query = '''
         SELECT machine_id, machine_name, wait_time_in_minutes
         FROM Machine
-        ORDER BY list_price ASC
+        ORDER BY wait_time_in_minutes ASC
         LIMIT 10
     '''
     return perform_sql_query(query)
