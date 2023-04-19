@@ -109,6 +109,6 @@ def get_machine_time(machine_id):
 @employee.route('/machines', methods=['GET'])
 def get_products():
     
-    query = 'SELECT machine_id, machine_name, floor_num FROM machine'
+    query = 'SELECT machine_id, machine_name, section FROM Machine'
     return perform_sql_query(query)
 
