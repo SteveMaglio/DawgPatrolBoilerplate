@@ -241,8 +241,8 @@ VALUES (10, 'Alison', 'Cecilia', 'Picerno', 0, '2003-07-11', 'Manager', 40, null
 
 
 INSERT INTO Class
-Values (7, 'Yoga', 10, '14-02-23 09.00.00', 60, 10),
-       (10, 'Spin', 21, '17-03-22 04.00.00', 75, 15);
+Values (7, 'Yoga', 10, '14-02-23', 60, 10),
+       (10, 'Spin', 21, '17-03-22', 75, 15);
 
 
 INSERT INTO Student
