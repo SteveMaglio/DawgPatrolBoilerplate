@@ -331,5 +331,99 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "41403128-0379-47d4-ab86-6800580dbec6",
+    "colId": "960ea0f0-d37e-402c-ae32-767b973c5f7c",
+    "containerId": "",
+    "name": "get_all_employees",
+    "url": "localhost:8001/emp/employees",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-04-19T02:54:39.924Z",
+    "modified": "2023-04-19T02:55:21.960Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "5ff6adbd-278f-451f-822d-db89ae843253",
+    "colId": "960ea0f0-d37e-402c-ae32-767b973c5f7c",
+    "containerId": "",
+    "name": "get_employee_1",
+    "url": "localhost:8001/emp/employees/10",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2023-04-19T02:55:53.972Z",
+    "modified": "2023-04-19T02:56:13.776Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "2b63b7b3-9ce8-4e9b-bc6b-a534f965bdf9",
+    "colId": "960ea0f0-d37e-402c-ae32-767b973c5f7c",
+    "containerId": "",
+    "name": "employee_clockout",
+    "url": "localhost:8001/emp/off_shift/10",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2023-04-19T03:00:35.359Z",
+    "modified": "2023-04-19T03:01:28.907Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "ad4bd6c7-e492-43a7-a0b4-f1e77029e9cf",
+    "colId": "960ea0f0-d37e-402c-ae32-767b973c5f7c",
+    "containerId": "",
+    "name": "employee_clockout_2",
+    "url": "localhost:8001/emp/off_shift/21",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2023-04-19T03:01:55.656Z",
+    "modified": "2023-04-19T03:02:25.608Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "8a607f3d-906e-4745-accc-b17360d0f2cf",
+    "colId": "960ea0f0-d37e-402c-ae32-767b973c5f7c",
+    "containerId": "",
+    "name": "play_song_1",
+    "url": "localhost:8001/emp/music",
+    "method": "POST",
+    "sortNum": 60000,
+    "created": "2023-04-19T03:04:45.115Z",
+    "modified": "2023-04-19T03:07:12.173Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"song_id\" : \"1000\",\n  \"song_name\": \"Levitating\",\n  \"employee_player_id\": \"10\",\n  \"artist\": \"Nardo Wick\",\n  \"genre\": \"rap\"\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8ff60ab3-d3e4-48ab-8616-5492aa04ded4",
+    "colId": "960ea0f0-d37e-402c-ae32-767b973c5f7c",
+    "containerId": "",
+    "name": "music_2",
+    "url": "localhost:8001/emp/music",
+    "method": "POST",
+    "sortNum": 70000,
+    "created": "2023-04-19T03:07:32.216Z",
+    "modified": "2023-04-19T03:09:05.771Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"song_id\" : \"2000\",\n  \"song_name\": \"Hot Boy\",\n  \"employee_player_id\": \"21\",\n  \"artist\": \"Nardo Wick\",\n  \"genre\": \"rap\"\n  \n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

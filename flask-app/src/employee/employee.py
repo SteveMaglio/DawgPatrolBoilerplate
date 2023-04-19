@@ -15,7 +15,7 @@ def get_employees():
 #finds a specific employee by their ID
 @employee.route('/employees/<employee_id>', methods=['GET'])
 def get_employee_by_id(employee_id):
-    query = 'select * from employee where Employee.employee_id = {0}'.format(employee_id)
+    query = 'select * from Employee where employee_id = {employee_id}'
     return perform_sql_query(query)
 
 @employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
