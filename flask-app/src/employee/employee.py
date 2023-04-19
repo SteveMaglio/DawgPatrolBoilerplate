@@ -18,16 +18,20 @@ def get_employee_by_id(employee_id):
     query = 'select * from Employee where employee_id = {employee_id}'
     return perform_sql_query(query)
 
-@employee.route('/off_shift/<employee_id>', methods = ['DELETE'])
-def clock_out(employee_id):
+@employee.route('/off_shift', methods = ['DELETE'])
+def clock_out():
     # collect data
+    
+    current_app.logger.info(f'')
     the_data = request.json
     current_app.logger.info(the_data)
+    
 
     # extract the variables
-    id = the_data['emp_id']
+    employee_id = the_data['emp_id']
+    current_app.logger.info(f'DELETING EMPLOYEE ID {employee_id}')
 
-    query = f'UPDATE Employee SET currently_on_shift = {0} WHERE employee_id = {0}'.format(employee_id)
+    query = f'UPDATE Employee SET currently_on_shift = false WHERE employee_id = {0}'.format(employee_id)
     current_app.logger.info(query)
 
     # execute and committing the insert statement
