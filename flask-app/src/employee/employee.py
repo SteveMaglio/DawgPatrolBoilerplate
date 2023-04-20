@@ -115,6 +115,36 @@ def get_products():
     return perform_sql_query(query)
 
 
+@employee.route('/machines', methods = ['POST'])
+def add_new_machine():
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    id = the_data['machine_id']
+    current_app.logger.info(f'id: {id}')
+    name = the_data['machine_name']
+    current_app.logger.info(f'name: {name}')
+    max_weight = the_data['max_weight']
+    current_app.logger.info(f'max_weight: {max_weight}')
+    section = the_data['machine_section']
+    current_app.logger.info(f'section: {section}')
+    wait_time = the_data['machine_wait_time']
+    current_app.logger.info(f'wait_time: {wait_time}')
+    
+    query = f'Insert into Machine (machine_id, machine_name, max_weight, section, wait_time_in_minutes) values ({id}, "{name}", {max_weight}, {section}, {str(wait_time)})'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
+
+
 # display top genres
 @employee.route('/top_3_genres', methods = ['GET'])
 def get_genre():

@@ -5668,5 +5668,65 @@ INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,
 INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,weight_in_lbs,currently_in_gym,lock_used,locker_room_used,section_being_used,class_being_used) VALUES (699,'Giacinta','Bubblemix','Frisel',true,'1998-07-12',133,344,true,598,'Male',3,NULL);
 INSERT INTO Student(NUID,stu_first,stu_middle,stu_last,is_male,DoB,height_in_cm,weight_in_lbs,currently_in_gym,lock_used,locker_room_used,section_being_used,class_being_used) VALUES (700,'Alford','Jaloo','Durgan',false,'1996-04-18',205,534,true,NULL,'Male',9,8);
 
-select * from LockerRoom where locker_room_sex = 'Female';
-select * from Locker join LockerRoom LR on LR.locker_room_sex = Locker.locker_room_name where locker_room_sex = 'Female';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- GymCrush demo
+-- giving NUID 1 a crush on NUID 2
+select crusher_id, crush_id from Student join GymCrushInfo GCI on Student.NUid = GCI.crusher_id where Student.NUid = 1;
+
+-- delete from GymCrushInfo where crusher_id = 1;
+
+
+-- MANAGER DEMO
+
+-- Switching section assigned to for employee # 15
+select employee_id, section_assigned_to from Employee where employee_id = 22;
+
+
+-- Employee #32 clocks out for the day
+select employee_id, currently_on_shift from Employee where employee_id = 32;
+
+-- Update Employee set currently_on_shift = 1 where employee_id = 32;
+
+-- Adding new machine
+select * from Machine order by machine_id desc;
+
+-- delete from Machine where machine_id = 301;
+
+-- add new machine with an ID of 301 in APPSMITH
+
+-- redo query and see updated machine entry
+
+select * from Machine order by machine_id desc;
+
+
+-- adding a new song to the gym
+
+select * from Music order by song_id desc;
+
+-- insert song #1001
+
+-- delete from Music where song_id = 1029;
+
+-- recheck the list
+select * from Music order by song_id desc;
+
+-- observe that the chart of most popular genres updates
+
+
+

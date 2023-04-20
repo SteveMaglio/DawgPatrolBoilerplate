@@ -47,12 +47,12 @@ def add_new_crush():
     current_app.logger.info(the_data)
 
     # extract the variables
-    id = the_data['CrushInput']
-    current_app.logger.info(f'crush_id: {id}')
-    id2 = the_data['NUid']
-    current_app.logger.info(f'crusher_id: {id2}')
+    crush_on = the_data['CrushInput']
+    current_app.logger.info(f'crush_id: {crush_on}')
+    crusher = the_data['NUid']
+    current_app.logger.info(f'crusher_id: {crusher}')
     
-    query = f'Insert into GymCrushInfo (crusher_id, crush_id) values ({id}, {id2})'
+    query = f'Insert into GymCrushInfo (crusher_id, crush_id) values ({crusher}, {crush_on})'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
@@ -73,6 +73,28 @@ def delete_student():
     NUID = the_data['NUID']
 
     query = f'UPDATE Student SET currently_in_gym = {0} WHERE NUId = {NUID}'
+    current_app.logger.info(query)
+
+    # execute and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!   "
+
+
+@student.route('/wait_time/<machine_id>', methods = ['PUT'])
+def update_machine_time(machine_id):
+
+    # collect data
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+    time = the_data['wait_time_in_minutes']
+    
+    # create query
+    query = f'UPDATE Machine SET wait_time_in_minutes = {time} WHERE machine_id = {machine_id}'
     current_app.logger.info(query)
 
     # execute and committing the insert statement
@@ -152,26 +174,6 @@ def get_class_capacity(class_id):
     return perform_sql_query(query)
 
 
-@student.route('/wait_time/<machine_id>', methods = ['PUT'])
-def update_machine_time(machine_id):
-
-    # collect data
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    # extract the variables
-    time = the_data['wait_time_in_minutes']
-    
-    # create query
-    query = f'UPDATE Machine SET wait_time_in_minutes = {time} WHERE machine_id = {machine_id}'
-    current_app.logger.info(query)
-
-    # execute and committing the insert statement
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return "Success!   "
 
 
 @student.route('/10_shortest_waits', methods = ['GET'])
