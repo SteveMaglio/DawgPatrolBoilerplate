@@ -623,5 +623,133 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "f379798e-455d-4da1-9480-96957fd828bc",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "testGetClasses",
+    "url": "localhost:8001/stu/get_classes",
+    "method": "GET",
+    "sortNum": 280000,
+    "created": "2023-04-20T17:33:13.553Z",
+    "modified": "2023-04-20T17:33:49.168Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "0600c192-64ff-4c5b-aa29-e6971063a6be",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "testGetClassInfo",
+    "url": "localhost:8001/stu/get_class_info",
+    "method": "GET",
+    "sortNum": 300000,
+    "created": "2023-04-20T17:35:19.386Z",
+    "modified": "2023-04-20T17:43:01.567Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "2",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "0c598cac-da34-4e11-8902-7e8777c19106",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "testgetClassInfo2",
+    "url": "localhost:8001/stu/get_class_info",
+    "method": "GET",
+    "sortNum": 310000,
+    "created": "2023-04-20T17:43:57.307Z",
+    "modified": "2023-04-20T17:44:09.411Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "5",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8afffdde-70a6-4107-9c99-49cc742b8d1b",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "testGetClassinfo3",
+    "url": "localhost:8001/stu/get_class_info",
+    "method": "GET",
+    "sortNum": 320000,
+    "created": "2023-04-20T17:44:27.590Z",
+    "modified": "2023-04-20T17:44:43.054Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "7",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "41e905c9-bba0-4147-b97d-b55a7ece0582",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "getClassCap",
+    "url": "localhost:8001/stu/class_cap",
+    "method": "GET",
+    "sortNum": 350000,
+    "created": "2023-04-20T17:47:34.732Z",
+    "modified": "2023-04-20T17:51:49.288Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "1\n",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c627febd-ef8e-4407-8eb4-9c83be289902",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "getClassCap2",
+    "url": "localhost:8001/stu/class_cap",
+    "method": "GET",
+    "sortNum": 360000,
+    "created": "2023-04-20T17:56:13.294Z",
+    "modified": "2023-04-20T17:56:26.114Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "4",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "2eb2aa48-c487-45a1-928b-5cb249532792",
+    "colId": "b386cb9a-b9e4-4d11-b55b-d98a5651e2d8",
+    "containerId": "",
+    "name": "getClassCapFail",
+    "url": "",
+    "method": "GET",
+    "sortNum": 370000,
+    "created": "2023-04-20T17:56:55.578Z",
+    "modified": "2023-04-20T17:57:02.627Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "44",
+      "form": []
+    },
+    "tests": []
   }
 ]
