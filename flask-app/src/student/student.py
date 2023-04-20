@@ -210,7 +210,7 @@ def get_class_info():
     query = f'''
     SELECT start_datetime, duration_in_minutes
     FROM Class
-    WHERE class_id = ({the_data} - 1)
+    WHERE class_id = {the_data} 
     '''
     return perform_sql_query(query)
 
@@ -228,9 +228,9 @@ def class_cap():
     SELECT 100 * (
     SELECT count(*) 
     FROM Student
-    WHERE class_being_used = ({the_data} - 1))
+    WHERE class_being_used = {the_data})
     / (SELECT class_capacity
        FROM Class
-       WHERE class_id = ({the_data} - 1)) as capacityPercentage
+       WHERE class_id = {the_data}) as capacityPercentage
     '''
     return perform_sql_query(query)
