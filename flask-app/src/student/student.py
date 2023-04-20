@@ -184,3 +184,53 @@ def get_shortest_time():
         LIMIT 10
     '''
     return perform_sql_query(query)
+
+
+
+# gets class information
+@student.route('/get_classes', methods = ['GET'])
+def get_classes():
+    cursor = db.get_db().cursor()
+    query = '''
+    SELECT class_name AS label, class_id AS value
+    FROM Class
+    '''
+    return perform_sql_query(query)
+
+
+# gets class time info
+@student.route('/get_class_info', methods = ['GET'])
+def get_class_info():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+
+    cursor = db.get_db().cursor()
+    query = f'''
+    SELECT start_datetime, duration_in_minutes
+    FROM Class
+    WHERE class_id = ({the_data} - 1)
+    '''
+    return perform_sql_query(query)
+
+
+# gets class capacity
+@student.route('/class_cap', methods = ['GET'])
+def class_cap():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extract the variables
+
+    cursor = db.get_db().cursor()
+    query = f'''
+    SELECT 100 * (
+    SELECT count(*) 
+    FROM Student
+    WHERE class_being_used = ({the_data} - 1))
+    / (SELECT class_capacity
+       FROM Class
+       WHERE class_id = ({the_data} - 1)) as capacityPercentage
+    '''
+    return perform_sql_query(query)
